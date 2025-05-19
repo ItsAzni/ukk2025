@@ -23,13 +23,13 @@ $semuaBuku = $koneksi->query($query)->fetch_all(MYSQLI_ASSOC);
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
-    <title>Perpustakaan</title>
+    <title>Perpustakaan | Buku</title>
 </head>
 
 <body>
     <div class="navbar bg-primary shadow-sm px-96">
         <div class="flex-1">
-            <a class="btn btn-ghost text-xl">Perpustakaan | Buku</a>
+            <a class="btn btn-ghost text-xl">Perpustakaan</a>
         </div>
         <div class="flex-none">
             <ul class="menu menu-horizontal px-1 items-center gap-2">
