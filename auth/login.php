@@ -2,6 +2,7 @@
 
 session_start();
 
+// Cek apakah user ada username di session, jika sudah ada, arahkah ke daftar buku page
 if (isset($_SESSION['username'])) {
     return header('Location: ../buku');
 }
@@ -22,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($user = $result->fetch_assoc()) {
             if (password_verify($password, $user['password'])) {
+                // Simpan data username dan role di sesion
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['role'] = $user['role'];
                 header("Location: ../buku");
@@ -58,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <?php if ($error): ?>
                     <div class="alert alert-error text-white mb-4">
-                        <?= htmlspecialchars($error) ?>
+                        <?= $error ?>
                     </div>
                 <?php endif; ?>
 

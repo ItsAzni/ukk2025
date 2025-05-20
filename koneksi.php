@@ -1,4 +1,5 @@
 <?php
+
 // Variabel koneksi
 $host = "localhost";
 $user = "root";

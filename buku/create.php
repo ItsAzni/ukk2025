@@ -2,6 +2,7 @@
 
 session_start();
 
+// Cek apakah user ada username di session, jika tidak ada, arahkah ke login page
 if (!isset($_SESSION['username'])) {
     return header('Location: ../auth/login.php');
 }
@@ -10,7 +11,7 @@ require('../koneksi.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $koneksi->prepare("INSERT INTO buku 
-        (kode_buku, no_buku, judul_buku, tahun_terbit, nama_penerbit, penerbit, jumlah_halaman, harga, gambar) 
+        (kode_buku, no_buku, judul_buk, tahun_terbit, nama_penerbit, penerbit, jumlah_halaman, harga, gambar) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
     $stmt->execute([
@@ -50,8 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class="flex-none">
             <ul class="menu menu-horizontal px-1 items-center gap-2">
-                <li><a href="index.php">Daftar Buku</a></li>
-                <li><a href="../user">Daftar User</a></li>
+                <li><a href="../buku">Daftar Buku</a></li>
+                <!-- Cek jika role user adalah admin, maka akan mucul menu daftar user -->
+                <?php if ($_SESSION['role'] == 'admin'): ?>
+                    <li><a href="../user">Daftar User</a></li>
+                <?php endif; ?>
                 <li><a href="../auth/logout.php" class="btn btn-error text-white">Logout</a></li>
             </ul>
         </div>

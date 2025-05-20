@@ -2,6 +2,7 @@
 
 session_start();
 
+// Cek apakah user ada username di session, jika tidak ada, arahkah ke login page
 if (!isset($_SESSION['username'])) {
     header('Location: ../auth/login.php');
     exit();
@@ -33,8 +34,11 @@ $semuaBuku = $koneksi->query($query)->fetch_all(MYSQLI_ASSOC);
         </div>
         <div class="flex-none">
             <ul class="menu menu-horizontal px-1 items-center gap-2">
-                <li><a>Daftar Buku</a></li>
-                <li><a href="../user">Daftar User</a></li>
+                <li><a href="../buku">Daftar Buku</a></li>
+                <!-- Cek jika role user adalah admin, maka akan mucul menu daftar user -->
+                <?php if ($_SESSION['role'] == 'admin'): ?>
+                    <li><a href="../user">Daftar User</a></li>
+                <?php endif; ?>
                 <li><a href="../auth/logout.php" class="btn btn-error text-white">Logout</a></li>
             </ul>
         </div>
@@ -48,6 +52,7 @@ $semuaBuku = $koneksi->query($query)->fetch_all(MYSQLI_ASSOC);
 
         <!-- Daftar semua buku -->
         <div class="grid grid-cols-3 gap-8">
+            <!-- Looping semua data di varibale $semuaBuku -->
             <?php foreach ($semuaBuku as $index => $buku): ?>
                 <div class="card bg-base-300 w-90 shadow-sm rounded-lg">
 
